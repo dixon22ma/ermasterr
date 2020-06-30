@@ -17,6 +17,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.ColorDialog;
 import org.eclipse.swt.widgets.Control;
@@ -64,7 +65,9 @@ public class ChangeBackgroundColorAction extends SelectionAction {
         final ImageData imageData = ERDiagramActivator.getImageDescriptor(ImageKey.CHANGE_BACKGROUND_COLOR).getImageData();
         final int blackPixel = imageData.palette.getPixel(new RGB(0, 0, 0));
         imageData.transparentPixel = imageData.palette.getPixel(new RGB(255, 255, 255));
-        imageData.palette.colors[blackPixel] = rgb;
+        RGB[] dataColor =imageData.palette.colors; 
+        if(dataColor != null)
+        	dataColor[blackPixel] = rgb;
 
         // if (this.image != null) {
         // this.image.dispose();

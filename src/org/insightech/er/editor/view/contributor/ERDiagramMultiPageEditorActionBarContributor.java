@@ -22,7 +22,9 @@ public class ERDiagramMultiPageEditorActionBarContributor extends MultiPageEdito
 
         actionBars.clearGlobalActionHandlers();
         actionBars.getToolBarManager().removeAll();
-
+        
+        if(activeEditor == null)
+        	return;
         final ERDiagramEditor editor = (ERDiagramEditor) activeEditor;
 
         final ERDiagramActionBarContributor activeContributor = editor.getActionBarContributor();

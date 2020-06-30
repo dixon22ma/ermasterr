@@ -40,7 +40,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.insightech.er.ERDiagramActivator;
@@ -393,7 +395,16 @@ public class ERDiagramEditor extends GraphicalEditorWithPalette {
      */
     @Override
     public void selectionChanged(final IWorkbenchPart part, final ISelection selection) {
-        final IEditorPart editorPart = getSite().getPage().getActiveEditor();
+    	IWorkbenchPartSite site = getSite();
+    	if(site == null)
+    		return;
+    	IWorkbenchPage page = site.getPage();
+    	if(page == null)
+    		return;
+    	IEditorPart editor = page.getActiveEditor();
+    	if(editor == null)
+    		return;
+        final IEditorPart editorPart = editor;
 
         if (editorPart instanceof ERDiagramMultiPageEditor) {
             final ERDiagramMultiPageEditor multiPageEditorPart = (ERDiagramMultiPageEditor) editorPart;
